@@ -17,31 +17,25 @@ public class ChessBoard {
     private boolean empasPossible = false;
     private boolean empasSince = false;
     private ArrayList<Piece> lastmoves = new ArrayList<>();
-
-
+    private int depth;
     private Piece eaten;
 
-    //debug
-    private boolean debug = false;
 
-    private volatile static ChessBoard uniqueInstance;
-
-    public static ChessBoard getInstance(){
-
-        if (uniqueInstance == null) {
-            synchronized (ChessBoard.class){
-                if (uniqueInstance == null) {
-                    uniqueInstance = new ChessBoard();
-                }
-            }
-        }
-        return uniqueInstance;
-    }
-
-    private ChessBoard(){
+    /*
+        Creates two player instances and creates the chessboard arraylist.
+     */
+    public ChessBoard(int depth){
         players.add(new Player("White", Color.WHITE));
         players.add(new Player("Black", Color.BLACK));
+        this.depth = depth;
+        this.board = createChessBoard();
+    }
 
+    /*
+        Method that creates the board arraylist
+     */
+    public ArrayList<ArrayList<Square>> createChessBoard() {
+        ArrayList<ArrayList<Square>> board = new ArrayList<>();
         for(int row = 1; row <= 8; row++){
             board.add( new ArrayList<Square>() );
             for(int col = 1; col <= 8;col++) {
@@ -52,19 +46,19 @@ public class ChessBoard {
                     if (col == 1 || col == 8) {
                         thisPosition.setPiece(new Rook(thisPosition, Color.WHITE));
                     }
-                    //Setting white Engine.Pieces.Knight
+                    //Setting white Knight
                     if (col == 2 || col == 7) {
                         thisPosition.setPiece(new Knight(thisPosition, Color.WHITE));
                     }
-                    //Setting white Engine.Pieces.Bishop
+                    //Setting white Bishop
                     if (col == 3 || col == 6) {
                         thisPosition.setPiece(new Bishop(thisPosition, Color.WHITE));
                     }
-                    //Setting white Engine.Pieces.Queen
+                    //Setting white Queen
                     if (col == 4) {
                         thisPosition.setPiece(new Queen(thisPosition, Color.WHITE));
                     }
-                    //Setting white Engine.Pieces.King
+                    //Setting white King
                     if (col == 5) {
                         thisPosition.setPiece(new King(thisPosition, Color.WHITE));
                         lastmoves.add( thisPosition.getPiece());
@@ -85,46 +79,33 @@ public class ChessBoard {
                     if (col == 1 || col == 8) {
                         thisPosition.setPiece(new Rook(thisPosition, Color.BLACK));
                     }
-                    //Setting BLACK Engine.Pieces.Knight
+                    //Setting BLACK Knight
                     if (col == 2 || col == 7) {
                         thisPosition.setPiece(new Knight(thisPosition, Color.BLACK));
                     }
-                    //Setting BLACK Engine.Pieces.Bishop
+                    //Setting BLACK Bishop
                     if (col == 3 || col == 6) {
                         thisPosition.setPiece(new Bishop(thisPosition, Color.BLACK));
                     }
-                    //Setting BLACK Engine.Pieces.Queen
+                    //Setting BLACK Queen
                     if (col == 4) {
                         thisPosition.setPiece(new Queen(thisPosition, Color.BLACK));
                     }
-                    //Setting BLACK Engine.Pieces.King
+                    //Setting BLACK King
                     if (col == 5) {
                         thisPosition.setPiece(new King(thisPosition, Color.BLACK));
                         lastmoves.add( thisPosition.getPiece());
                     }
 
                 }
-
                 board.get(row-1).add(thisPosition);
             }
         }
-        Iterator<ArrayList<Square>> row = board.iterator();
-        ChessPieceIterator chesspieces = new ChessPieceIterator();
-        while (row.hasNext()) {
-            ArrayList<Square> squares= row.next();
-            Iterator<Square> position = squares.iterator();
-            while(position.hasNext()){
-                Square pos = position.next();
-                if (pos.getPiece() != null){
-
-                    chesspieces.addPiece(pos.getPiece());
-
-                }
-            }
-        }
-
+        return board;
     }
-
+    /*
+        Takes MoveObj as input, checks for errors and calls the specific move-method depending on what the special move is.
+     */
     public void move(MoveObj move) {
         if (((move.getSpecialMove() != SpecialMove.KINGSIDECASTLING) && (move.getSpecialMove() != SpecialMove.QUEENSIDECASTLING)) && (move.getRow() > 7 || move.getRow() < 0 || move.getColumn() > 7 || move.getColumn() < 0)) {
             move(error("Coordinates not within board", move.getColor()));
@@ -151,20 +132,26 @@ public class ChessBoard {
         }
     }
 
+    /*
+        Makes a disambiguous move (Only chesspiece, color and destination coordinates given)
+     */
     public void moveDisambiguous(MoveObj move) {
         ArrayList<Piece> pieces_move;
-        //System.out.println("move Disambiguous moveObj: \n row:" + move.getRow() + " col:" + move.getColumn() + "\n Engine.Pieces.Piece:" + move.getChessPiece() );
         Square destination = board.get(move.getRow()).get(move.getColumn());
         pieces_move = search(move.getChessPiece(), move.getColor(), move.getRow(), move.getColumn());
         if (pieces_move.size() != 1) {
-            System.out.println(pieces_move);
             move(error("Ambiguous/impossible move", move.getColor()));
         }
         else if(move.getChessPiece() == PieceType.PAWN && (move.getRow()==7 || move.getRow()==0)){
             move(error("Invalid promotion", move.getColor()));
         }
         else if(move.getChessPiece() == PieceType.KING && MoveChecker.checkCheck(move.getColor(), destination, this.board)) {
-            move(error("Can't put king into checkmate", move.getColor()));
+            if (move instanceof MoveObjHuman) {
+                move(error("Can't put king into checkmate", move.getColor()));
+            }
+            else {
+                move(new MoveObjComputer(this,depth));
+            }
         }
         else {
             Piece piece = pieces_move.get(0);
@@ -180,16 +167,24 @@ public class ChessBoard {
                 move((MoveObjHuman) error("Invalid check", move.getColor()));
             }
             else if (((move.getCheck() == Check.CHECKMATE && !MoveChecker.checkIfCheckmating(piece, destination, move.getColor(), this.board)) || (move.getCheck() == Check.NONE && MoveChecker.checkIfCheckmating(piece, destination, move.getColor(), this.board)))) {
-                if(debug){
-                    System.out.println("Entered invalid checkmate with: "+ (move.getCheck() == Check.NONE && MoveChecker.checkIfCheckmating(piece, destination, move.getColor(), this.board)));
-                }
+
                 move((MoveObjHuman) error("Invalid checkmate", move.getColor()));
             }
             else if (piece.getType()==PieceType.KING && (MoveChecker.checkCheck(move.getColor(), destination, this.board))){
-                move((MoveObjHuman) error("Can't put king into checkmate", move.getColor()));
+                if (move instanceof MoveObjHuman) {
+                    move(error("Can't put king into checkmate", move.getColor()));
+                }
+                else {
+                    move(new MoveObjComputer(this,depth));
+                }
             }
             else if (piece.getType() != PieceType.KING && MoveChecker.checkSuicide(move.getColor(), piece, destination, this.board)) {
-                move((MoveObjHuman) error("Piece movement would result in checkmate/check of own color", move.getColor()));
+                if (move instanceof MoveObjHuman) {
+                    move((MoveObjHuman) error("Piece movement would result in checkmate/check of own color", move.getColor()));
+                }
+                else {
+                    move(new MoveObjComputer(this,depth));
+                }
             }
             else {
                 if(piece.getType() == PieceType.PAWN){
@@ -211,6 +206,9 @@ public class ChessBoard {
         }
     }
 
+    /*
+        Makes a ambiguous move (Only chesspiece, color, one coordinate of origin and destination coordinates given)
+     */
     public void moveAmbiguous(MoveObj move) {
         ArrayList<Piece> pieces_move;
         Square destination = board.get(move.getRow()).get(move.getColumn());
@@ -243,17 +241,25 @@ public class ChessBoard {
                 move(error("Invalid check", move.getColor()));
             }
             else if (((move.getCheck() == Check.CHECKMATE && !MoveChecker.checkIfCheckmating(piece, destination, move.getColor(), this.board)) || (move.getCheck() == Check.NONE && MoveChecker.checkIfCheckmating(piece, destination, move.getColor(), this.board)))){
-                if(debug){
-                    System.out.println("Entered invalid checkmate with: "+ move.getCheck()+" "+ MoveChecker.checkIfCheckmating(piece, destination, move.getColor(), this.board));
-                }
+
                 move(error("Invalid checkmate", move.getColor()));
             }
             else if (piece.getType()==PieceType.KING){
                 if (MoveChecker.checkCheck(move.getColor(), destination, this.board)) {
-                    move(error("Can't put king into checkmate", move.getColor()));}
+                    if (move instanceof MoveObjHuman) {
+                        move(error("Can't put king into checkmate", move.getColor()));
+                    } else {
+                        move(new MoveObjComputer(this, depth));
+                    }
+                }
             }
             else if (MoveChecker.checkSuicide(move.getColor(), piece, destination, this.board)) {
-                move(error("Piece movement would result in checkmate", move.getColor()));
+                if (move instanceof MoveObjHuman) {
+                    move(error("Piece movement would result in checkmate", move.getColor()));
+                }
+                else {
+                    move(new MoveObjComputer(this, depth));
+                }
             }
             else {
                 if(piece.getType() == PieceType.PAWN){
@@ -273,6 +279,9 @@ public class ChessBoard {
         }
     }
 
+    /*
+        Makes a kingsidecastling move.
+     */
     public void moveKingSideCastling(MoveObj move) {
         if (!MoveChecker.checkKingSideCastling(move.getColor(), this.board)) {
             move(error("Kingsidecastling not valid", move.getColor()));
@@ -284,7 +293,11 @@ public class ChessBoard {
             Piece king = board.get(row).get(4).getPiece();
             Piece rook = board.get(row).get(7).getPiece();
             if(MoveChecker.checkCheck(move.getColor(), board.get(row).get(6), this.board)) {
-                move(error("Can't put king into checkmate", move.getColor()));
+                if (move instanceof MoveObjHuman) {
+                    move(error("Can't put king into checkmate", move.getColor()));
+                } else {
+                    move(new MoveObjComputer(this, depth));
+                }
             }
             else {
                 movePiece(king, board.get(row).get(6));
@@ -306,6 +319,9 @@ public class ChessBoard {
         }
     }
 
+    /*
+        Makes a Queensidecastling move
+     */
     public void moveQueenSideCastling(MoveObj move) {
         if (!MoveChecker.checkQueenSideCastling(move.getColor(), this.board)) {
             move(error("Queensidecastling not valid", move.getColor()));
@@ -320,7 +336,11 @@ public class ChessBoard {
             Piece king = board.get(row).get(4).getPiece();
             Piece rook = board.get(row).get(0).getPiece();
             if (MoveChecker.checkCheck(move.getColor(), board.get(row).get(2), this.board)) {
-                move(error("Can't put king into checkmate", move.getColor()));
+                if (move instanceof MoveObjHuman) {
+                    move(error("Can't put king into checkmate", move.getColor()));
+                } else {
+                    move(new MoveObjComputer(this, depth));
+                }
             } else {
                 movePiece(king, board.get(row).get(2));
                 movePiece(rook, board.get(row).get(3));
@@ -342,6 +362,9 @@ public class ChessBoard {
         }
     }
 
+    /*
+        Makes a move with promotion.
+     */
     public void movePromotion(MoveObj move) {
         ArrayList<Piece> pieces_move;
         Square destination = board.get(move.getRow()).get(move.getColumn());
@@ -351,7 +374,6 @@ public class ChessBoard {
             pieces_move = search(move.getChessPiece(), move.getFile(),move.getColor(), move.getRow(), move.getColumn(), move);
         }
         if (pieces_move.size() != 1) {
-            System.out.println(pieces_move);
             move(error("It's Ambiguous", move.getColor()));
         }
         else {
@@ -390,6 +412,7 @@ public class ChessBoard {
         }
     }
 
+
     public void updateLastMoves(Piece piece) {
         if (piece.getColor()== Color.WHITE) {
             Piece opponentPiece = lastmoves.get(1);
@@ -413,12 +436,12 @@ public class ChessBoard {
         ArrayList<Piece> possible_pieces = new ArrayList<>();
         for (int alpha = 0; alpha < pieces_type.size(); alpha++) {
             ArrayList<Square> possible_squares = new ArrayList<>();
-            if(debug){System.out.println(pieces_type.get(alpha));}
+
             possible_squares = pieces_type.get(alpha).validMoves(board);
             int valid_pieces = 0;
             for (int j = 0; j < possible_squares.size(); j++) {
                 if (possible_squares.get(j) == board.get(row).get(col)) {
-                    if(debug){System.out.println("alpha: "+ alpha + " j: " + j);}
+
                     valid_pieces++;
                 }
             }
@@ -426,7 +449,6 @@ public class ChessBoard {
                 possible_pieces.add(pieces_type.get(alpha));
             }
         }
-        if(debug){System.out.println(possible_pieces + " lol");}
         return possible_pieces;
     }
 
@@ -492,7 +514,6 @@ public class ChessBoard {
             empasPossible = true;
         }
         if (piece.getType() == PieceType.PAWN && Math.abs(piece.getSquare().getCol()-destination.getCol()) == 1 && destination.getPiece()==null) {
-            System.out.println(piece.toString() +' ' + piece.getSquare().getRow() + " " + piece.getSquare().getCol());
             eaten = board.get(piece.getSquare().getRow()).get(destination.getCol()).getPiece();
 
             if (players.get(0).getColor() == piece.getColor()) {
@@ -512,7 +533,6 @@ public class ChessBoard {
         }
 
         piece.getSquare().removePiece();
-        // System.out.println(" entered movePiece with destination = " + destination.getRow() + " " + destination.getCol());
         piece.setSquare(destination);
         destination.setPiece(piece);
 
@@ -569,7 +589,6 @@ public class ChessBoard {
             System.out.print("\n");
         }
         System.out.println("---------------------------------------------------------------------");
-
     }
 
 

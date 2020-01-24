@@ -186,32 +186,29 @@ public class TreeNode {
         return this.board;
     }
 
-    private ArrayList<Piece> getBestChildCombo() {
+    public ArrayList<Piece> getBestChildCombo() {
         int max = Integer.MIN_VALUE;
-        TreeNode child_final = null;
         Iterator childIterator = children.iterator();
         while (childIterator.hasNext()) {
             TreeNode child = (TreeNode) childIterator.next();
             if (child.getScore()>max) {
-                child_final=child;
                 max = child.getScore();
             }
         }
-        return findDifference(child_final.getBoard());
-    }
 
-    public Piece getBestChildPiece() {
-        Piece piece = getBestChildCombo().get(0);
-        for (int i=0;i<piece.validMoves(board).size();i++){
-            //System.out.println("Row valid: "+piece.validMoves(board).get(i).getRow()+"Col valid: "+piece.validMoves(board).get(i).getCol());
+        Iterator childIterator2 = children.iterator();
+        ArrayList<TreeNode> children2 = new ArrayList<>();
+        while (childIterator2.hasNext()) {
+            TreeNode child = (TreeNode) childIterator2.next();
+            if (child.getScore()==max) {
+                children2.add(child);
+            }
         }
-        return piece;
+        double prob = Math.random();
+        int index = (int)(prob*children2.size()-1);
+        return findDifference(children2.get(index).getBoard());
     }
 
-    public Square getBestChildSquare() {
-        Piece piece = getBestChildCombo().get(1);
-        return piece.getSquare();
-    }
 
     public ArrayList<Piece> findDifference(ArrayList<ArrayList<Square>> board_1) {
         if (wasCapture(this.board,board_1)) {
