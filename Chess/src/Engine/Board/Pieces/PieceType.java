@@ -1,4 +1,4 @@
-package Engine.Pieces;
+package Engine.Board.Pieces;
 
 public enum PieceType {
     PAWN,

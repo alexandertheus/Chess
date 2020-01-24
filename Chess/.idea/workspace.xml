@@ -1,7 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b21e456a-8746-4e03-b802-70926ff72074" name="Default Changelist" comment="" />
+    <list default="true" id="b21e456a-8746-4e03-b802-70926ff72074" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Engine/Board/ChessBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Engine/Board/ChessBoard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Engine/Board/Square.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Engine/Board/Square.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Engine/Move/MoveChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Engine/Move/MoveChecker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Engine/Move/MoveObj.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Engine/Move/MoveObj.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Engine/Move/MoveObjComputer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Engine/Move/MoveObjComputer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Engine/Move/MoveObjHuman.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Engine/Move/MoveObjHuman.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Engine/Move/TreeNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Engine/Move/TreeNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Engine/Pieces/Bishop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Engine/Board/Pieces/Bishop.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Engine/Pieces/Color.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Engine/Board/Pieces/Color.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Engine/Pieces/King.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Engine/Board/Pieces/King.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Engine/Pieces/Knight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Engine/Board/Pieces/Knight.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Engine/Pieces/Pawn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Engine/Board/Pieces/Pawn.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Engine/Pieces/Piece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Engine/Board/Pieces/Piece.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Engine/Pieces/PieceType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Engine/Board/Pieces/PieceType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Engine/Pieces/Queen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Engine/Board/Pieces/Queen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Engine/Pieces/Rook.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Engine/Board/Pieces/Rook.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Engine/Player/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Engine/Player/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Engine/Run/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Engine/Run/Game.java" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,10 +38,16 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
   <component name="ProjectId" id="1WnmYiooFKWWsZK5DLfVrlcI51D" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
@@ -72,10 +99,22 @@
       <workItem from="1579800325668" duration="1044000" />
       <workItem from="1579807584522" duration="5532000" />
       <workItem from="1579818329698" duration="335000" />
+      <workItem from="1579872010434" duration="8225000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

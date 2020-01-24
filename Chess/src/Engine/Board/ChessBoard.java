@@ -1,13 +1,12 @@
 package Engine.Board;
 
 import Engine.Move.*;
-import Engine.Pieces.*;
+import Engine.Board.Pieces.*;
 import Engine.Player.Player;
 import Engine.Run.Game;
 
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.lang.Math;
 
 public class ChessBoard {
@@ -135,7 +134,7 @@ public class ChessBoard {
     /*
         Makes a disambiguous move (Only chesspiece, color and destination coordinates given)
      */
-    public void moveDisambiguous(MoveObj move) {
+    private void moveDisambiguous(MoveObj move) {
         ArrayList<Piece> pieces_move;
         Square destination = board.get(move.getRow()).get(move.getColumn());
         pieces_move = search(move.getChessPiece(), move.getColor(), move.getRow(), move.getColumn());
@@ -209,7 +208,7 @@ public class ChessBoard {
     /*
         Makes a ambiguous move (Only chesspiece, color, one coordinate of origin and destination coordinates given)
      */
-    public void moveAmbiguous(MoveObj move) {
+    private void moveAmbiguous(MoveObj move) {
         ArrayList<Piece> pieces_move;
         Square destination = board.get(move.getRow()).get(move.getColumn());
         if (move.getFile() == 0 && move instanceof MoveObjHuman) {
@@ -282,7 +281,7 @@ public class ChessBoard {
     /*
         Makes a kingsidecastling move.
      */
-    public void moveKingSideCastling(MoveObj move) {
+    private void moveKingSideCastling(MoveObj move) {
         if (!MoveChecker.checkKingSideCastling(move.getColor(), this.board)) {
             move(error("Kingsidecastling not valid", move.getColor()));
         }
@@ -322,7 +321,7 @@ public class ChessBoard {
     /*
         Makes a Queensidecastling move
      */
-    public void moveQueenSideCastling(MoveObj move) {
+    private void moveQueenSideCastling(MoveObj move) {
         if (!MoveChecker.checkQueenSideCastling(move.getColor(), this.board)) {
             move(error("Queensidecastling not valid", move.getColor()));
         }
@@ -365,7 +364,7 @@ public class ChessBoard {
     /*
         Makes a move with promotion.
      */
-    public void movePromotion(MoveObj move) {
+    private void movePromotion(MoveObj move) {
         ArrayList<Piece> pieces_move;
         Square destination = board.get(move.getRow()).get(move.getColumn());
         if (move.getFile() == 0) {
@@ -413,7 +412,7 @@ public class ChessBoard {
     }
 
 
-    public void updateLastMoves(Piece piece) {
+    private void updateLastMoves(Piece piece) {
         if (piece.getColor()== Color.WHITE) {
             Piece opponentPiece = lastmoves.get(1);
             if (opponentPiece.getType() == PieceType.PAWN) {
@@ -431,7 +430,7 @@ public class ChessBoard {
     }
 
 
-    public ArrayList<Piece> search (PieceType type, Color color,int row, int col){
+    private ArrayList<Piece> search (PieceType type, Color color,int row, int col){
         ArrayList<Piece> pieces_type = MoveChecker.getPiecesOf(type, color, this.board);
         ArrayList<Piece> possible_pieces = new ArrayList<>();
         for (int alpha = 0; alpha < pieces_type.size(); alpha++) {
@@ -572,13 +571,6 @@ public class ChessBoard {
     }
 
 
-
-    public Piece getState() {return this.eaten;}
-
-    public void setState() {this.eaten = null;}
-
-
-
     public void Print () {
         System.out.print("\n");
         for (int row = 7; row >=0; row--) {
@@ -597,31 +589,6 @@ public class ChessBoard {
         String inMove;
         inMove = Game.input.next();
         return new MoveObjHuman(inMove, color);
-    }
-
-    private String translatePiece(String piece){
-        String translated = "";
-        if(piece.charAt(0) == 'W'){
-            translated += "White";
-        }
-        else{
-            translated += "Black";
-        }
-        switch(piece.charAt(1)){
-            case 'R':
-                return translated + " Rook";
-            case 'N':
-                return translated + " Knight";
-            case 'B':
-                return translated + " Bishop";
-            case 'Q':
-                return translated + " Queen";
-            case 'K':
-                return translated + " King";
-            case 'P':
-                return translated + " Pawn";
-        }
-        return translated;
     }
 
 }

@@ -1,7 +1,7 @@
 package Engine.Move;
 
-import Engine.Pieces.Color;
-import Engine.Pieces.PieceType;
+import Engine.Board.Pieces.Color;
+import Engine.Board.Pieces.PieceType;
 
 public interface MoveObj {
 

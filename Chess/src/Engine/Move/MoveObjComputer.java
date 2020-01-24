@@ -1,10 +1,9 @@
 package Engine.Move;
 
 import Engine.Board.Square;
-import Engine.Pieces.Color;
-import Engine.Pieces.Pawn;
-import Engine.Pieces.Piece;
-import Engine.Pieces.PieceType;
+import Engine.Board.Pieces.Color;
+import Engine.Board.Pieces.Piece;
+import Engine.Board.Pieces.PieceType;
 import Engine.Board.ChessBoard;
 
 import java.util.ArrayList;

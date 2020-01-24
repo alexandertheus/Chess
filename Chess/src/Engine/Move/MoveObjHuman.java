@@ -1,7 +1,7 @@
 package Engine.Move;
 
-import Engine.Pieces.Color;
-import Engine.Pieces.PieceType;
+import Engine.Board.Pieces.Color;
+import Engine.Board.Pieces.PieceType;
 
 public class MoveObjHuman implements MoveObj {
 
@@ -17,7 +17,6 @@ public class MoveObjHuman implements MoveObj {
     private PieceType promotedPiece;
     private Check check = Check.NONE;
 
-    private boolean debug = false;
 
 
     private SpecialMove specialMove = SpecialMove.DISAMBGIGUOUS;
@@ -31,8 +30,6 @@ public class MoveObjHuman implements MoveObj {
         if(input.length()>2 && input.charAt(input.length()-1) == '+'){
             if(input.charAt(input.length()-2) == '+'){
                 moveDecoder(input.substring(0, input.length() - 2));
-                if(debug){System.out.println("checkmate entered in Engine.Move.MoveObj");}
-                this.check = check.CHECKMATE;
             }
             else{
                 moveDecoder(input.substring(0, input.length() - 1));
@@ -48,7 +45,7 @@ public class MoveObjHuman implements MoveObj {
             2 -> simple pawn move : e6
             3 -> simple move : Be6, pawn promotion: e8Q, Castling king size: 0-0
             4 -> Engine.Move.Capture : Bxe6, ambiguous simple move : Bde6 or B4e6, enpassant : exd6
-            5 -> Engine.Pieces.Queen side Castling : 0-0-0, Superambiguous move : Qh6e6, ambiguous simple capture: Bdxe6
+            5 -> Engine.Board.Pieces.Queen side Castling : 0-0-0, Superambiguous move : Qh6e6, ambiguous simple capture: Bdxe6
             6 -> Superambiguous capture move: Qh6xe6
         sets all parameters
      */
@@ -159,7 +156,7 @@ public class MoveObjHuman implements MoveObj {
                 this.capture = Capture.CAPTURE;
             }
 
-            //Engine.Pieces.Pawn promotion capture
+            //Engine.Board.Pieces.Pawn promotion capture
             else if (input.charAt(1) == 'x'){
                 this.file =letterToNumber(input.charAt(0));
                 this.capture = Capture.CAPTURE;

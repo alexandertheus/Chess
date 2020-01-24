@@ -1,8 +1,8 @@
 package Engine.Player;
 
 import Engine.Board.Square;
-import Engine.Pieces.Color;
-import Engine.Pieces.Piece;
+import Engine.Board.Pieces.Color;
+import Engine.Board.Pieces.Piece;
 
 import java.util.ArrayList;
 

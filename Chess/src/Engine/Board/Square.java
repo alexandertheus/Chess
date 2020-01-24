@@ -1,6 +1,6 @@
 package Engine.Board;
 
-import Engine.Pieces.Piece;
+import Engine.Board.Pieces.Piece;
 
 public class Square {
     private int row;

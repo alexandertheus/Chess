@@ -1,5 +1,5 @@
 package Engine.Move;
-import Engine.Pieces.*;
+import Engine.Board.Pieces.*;
 import Engine.Board.*;
 
 import java.util.ArrayList;
@@ -273,15 +273,5 @@ public class TreeNode {
         return pieces;
     }
 
-    public void Print (ArrayList<ArrayList<Square>> board) {
-        System.out.print("\n");
-        for (int row = 7; row >=0; row--) {
-            for (int col = 0; col < 8; col++) {
-                System.out.print(board.get(row).get(col).toString());
-
-            }
-            System.out.print("\n");
-        }
-    }
 
 }

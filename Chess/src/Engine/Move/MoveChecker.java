@@ -1,6 +1,6 @@
 package Engine.Move;
 
-import Engine.Pieces.*;
+import Engine.Board.Pieces.*;
 
 import java.util.ArrayList;
 import Engine.Board.*;

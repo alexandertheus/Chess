@@ -4,7 +4,7 @@ import Engine.Board.CheckStatus;
 import Engine.Board.ChessBoard;
 import Engine.Move.MoveObjComputer;
 import Engine.Move.MoveObjHuman;
-import Engine.Pieces.Color;
+import Engine.Board.Pieces.Color;
 import Engine.Player.Player;
 
 import java.util.ArrayList;
@@ -73,9 +73,6 @@ public class Game{
 
     }
 
-    public void move(MoveObjHuman inMove){
-
-    }
 
     /*
         Depending on who won the winner is given as ouput (String)

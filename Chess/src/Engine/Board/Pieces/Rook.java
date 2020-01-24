@@ -1,4 +1,4 @@
-package Engine.Pieces;
+package Engine.Board.Pieces;
 
 import java.util.ArrayList;
 import Engine.Board.Square;
