@@ -95,7 +95,7 @@ public class Pawn implements Piece {
                     }
                 }
             }
-            //System.out.println(possible_squares);
+
 
         }
         if (this.getColor() == Color.BLACK) {

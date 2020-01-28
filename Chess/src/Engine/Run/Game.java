@@ -60,7 +60,7 @@ public class Game{
             }
             else {
                 System.out.println("Computer (Black) enters move...");
-                chessBoard.move(new MoveObjComputer(this.chessBoard, depth));
+                chessBoard.move(new MoveObjComputer(this.chessBoard, this.depth));
             }
             if(this.turn == Color.WHITE){
                 this.turn = Color.BLACK;

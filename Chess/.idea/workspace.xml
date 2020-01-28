@@ -2,25 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b21e456a-8746-4e03-b802-70926ff72074" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Engine/Board/ChessBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Engine/Board/ChessBoard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Engine/Board/Square.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Engine/Board/Square.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Engine/Move/MoveChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Engine/Move/MoveChecker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Engine/Move/MoveObj.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Engine/Move/MoveObj.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Engine/Move/MoveObjComputer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Engine/Move/MoveObjComputer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Engine/Move/MoveObjHuman.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Engine/Move/MoveObjHuman.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Engine/Move/TreeNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Engine/Move/TreeNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Engine/Pieces/Bishop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Engine/Board/Pieces/Bishop.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Engine/Pieces/Color.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Engine/Board/Pieces/Color.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Engine/Pieces/King.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Engine/Board/Pieces/King.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Engine/Pieces/Knight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Engine/Board/Pieces/Knight.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Engine/Pieces/Pawn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Engine/Board/Pieces/Pawn.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Engine/Pieces/Piece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Engine/Board/Pieces/Piece.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Engine/Pieces/PieceType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Engine/Board/Pieces/PieceType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Engine/Pieces/Queen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Engine/Board/Pieces/Queen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Engine/Pieces/Rook.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Engine/Board/Pieces/Rook.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Engine/Player/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Engine/Player/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Engine/Board/Pieces/Pawn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Engine/Board/Pieces/Pawn.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Engine/Run/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Engine/Run/Game.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -51,6 +35,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="Engine.Board" />
       <recent name="Engine.Run" />
       <recent name="Engine" />
     </key>
@@ -99,7 +84,11 @@
       <workItem from="1579800325668" duration="1044000" />
       <workItem from="1579807584522" duration="5532000" />
       <workItem from="1579818329698" duration="335000" />
-      <workItem from="1579872010434" duration="8225000" />
+      <workItem from="1579872010434" duration="8748000" />
+      <workItem from="1579891872286" duration="1457000" />
+      <workItem from="1579958727054" duration="421000" />
+      <workItem from="1580049078976" duration="707000" />
+      <workItem from="1580052544399" duration="695000" />
     </task>
     <servers />
   </component>
@@ -111,7 +100,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>

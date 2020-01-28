@@ -222,7 +222,6 @@ public class ChessBoard {
         }
         if (pieces_move.size() != 1) {
             move(error("Ambiguous impossible", move.getColor()));
-            ////IMPORTANT: Need method to ask for coordinates. Then call this.move(new Engine.Move.MoveObj(String input, color)
         } else {
             Piece piece = pieces_move.get(0);
             if (piece.getType() == PieceType.PAWN && !MoveChecker.validEnPassant(piece, destination, move.getCapture(), this.board) && destination.getPiece() == null) {
